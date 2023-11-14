@@ -1,0 +1,721 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LeaveManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CancelationReasons">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reason" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Genderid" Type="int" />
+          <Property Name="RoleTypeId" Type="int" />
+          <Property Name="EmploymentDate" Type="date" />
+          <Property Name="Vacation" Type="int" />
+          <Property Name="Sick" Type="int" />
+          <Property Name="Department" Type="int" />
+          <Property Name="Personal" Type="int" />
+          <Property Name="Passwords" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="gender" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="LeaveStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="LeaveSubmissionTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpID" Type="int" />
+          <Property Name="LeaveTypeId" Type="int" />
+          <Property Name="LeaveStatusId" Type="int" />
+          <Property Name="SubmissionDate" Type="date" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="TotalDays" Type="int" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="CancelId" Type="int" />
+        </EntityType>
+        <EntityType Name="LeaveTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Roletest">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="RoleTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="roles" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="StudentName" Type="nchar" MaxLength="50" />
+          <Property Name="StudentFees" Type="int" />
+          <Property Name="StudentCity" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LeaveManagementSystem.dbo.ViewAll' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewAll">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="EmployeeID" Type="nvarchar" MaxLength="50" />
+          <Property Name="gender" Type="nvarchar" MaxLength="15" />
+          <Property Name="Full Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+          <Property Name="SubmissionDate" Type="date" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="TotalDays" Type="int" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="status" Type="varchar" MaxLength="30" />
+          <Property Name="reason" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LeaveManagementSystem.dbo.ViewEmployees' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewEmployees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="EmployeeID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lname" Type="nvarchar" MaxLength="50" />
+          <Property Name="gender" Type="nvarchar" MaxLength="15" />
+          <Property Name="roles" Type="nvarchar" MaxLength="20" />
+          <Property Name="Passwords" Type="nchar" MaxLength="20" />
+          <Property Name="EmploymentDate" Type="date" />
+          <Property Name="Vacation" Type="int" />
+          <Property Name="Sick" Type="int" />
+          <Property Name="Department" Type="int" />
+          <Property Name="Personal" Type="int" />
+        </EntityType>
+        <Association Name="FK LeaveTypeId_LeaveTypes">
+          <End Role="LeaveStatus" Type="Self.LeaveStatus" Multiplicity="0..1" />
+          <End Role="LeaveSubmissionTable" Type="Self.LeaveSubmissionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeaveStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LeaveSubmissionTable">
+              <PropertyRef Name="LeaveTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Genderid__Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Genderid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LeaveSubm__EmpID__29221CFB">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="LeaveSubmissionTable" Type="Self.LeaveSubmissionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LeaveSubmissionTable">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cancelid_Cancel">
+          <End Role="CancelationReasons" Type="Self.CancelationReasons" Multiplicity="0..1" />
+          <End Role="LeaveSubmissionTable" Type="Self.LeaveSubmissionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CancelationReasons">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LeaveSubmissionTable">
+              <PropertyRef Name="CancelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_RoleTypes">
+          <End Role="RoleTypes" Type="Self.RoleTypes" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleTypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveStatusid_LeaveStatus">
+          <End Role="LeaveStatus" Type="Self.LeaveStatus" Multiplicity="0..1" />
+          <End Role="LeaveSubmissionTable" Type="Self.LeaveSubmissionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeaveStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LeaveSubmissionTable">
+              <PropertyRef Name="LeaveStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="FilterbyAllFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpID" Type="nvarchar" Mode="In" />
+          <Parameter Name="type" Type="nvarchar" Mode="In" />
+          <Parameter Name="status" Type="nvarchar" Mode="In" />
+          <Parameter Name="StartDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="EndDate" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="InsertLeaveRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Empid" Type="int" Mode="In" />
+          <Parameter Name="SubmissionDate" Type="date" Mode="In" />
+          <Parameter Name="LeaveTypeId" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+          <Parameter Name="TotalDays" Type="int" Mode="In" />
+          <Parameter Name="Comments" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="UpdateLeaveStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LeaveID" Type="int" Mode="In" />
+          <Parameter Name="NewStatus" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateRoleType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="role" Type="nvarchar" Mode="In" />
+          <Parameter Name="roleid" Type="int" Mode="In" />
+          <Parameter Name="OperationType" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="LeaveManagementSystemModelStoreContainer">
+          <EntitySet Name="CancelationReasons" EntityType="Self.CancelationReasons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveStatus" EntityType="Self.LeaveStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveSubmissionTable" EntityType="Self.LeaveSubmissionTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveTypes" EntityType="Self.LeaveTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roletest" EntityType="Self.Roletest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleTypes" EntityType="Self.RoleTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViewAll" EntityType="Self.ViewAll" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewAll].[id] AS [id], 
+    [ViewAll].[EmployeeID] AS [EmployeeID], 
+    [ViewAll].[gender] AS [gender], 
+    [ViewAll].[Full Name] AS [Full Name], 
+    [ViewAll].[type] AS [type], 
+    [ViewAll].[SubmissionDate] AS [SubmissionDate], 
+    [ViewAll].[StartDate] AS [StartDate], 
+    [ViewAll].[EndDate] AS [EndDate], 
+    [ViewAll].[TotalDays] AS [TotalDays], 
+    [ViewAll].[Comments] AS [Comments], 
+    [ViewAll].[status] AS [status], 
+    [ViewAll].[reason] AS [reason]
+    FROM [dbo].[ViewAll] AS [ViewAll]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewEmployees" EntityType="Self.ViewEmployees" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewEmployees].[id] AS [id], 
+    [ViewEmployees].[EmployeeID] AS [EmployeeID], 
+    [ViewEmployees].[Fname] AS [Fname], 
+    [ViewEmployees].[Lname] AS [Lname], 
+    [ViewEmployees].[gender] AS [gender], 
+    [ViewEmployees].[roles] AS [roles], 
+    [ViewEmployees].[Passwords] AS [Passwords], 
+    [ViewEmployees].[EmploymentDate] AS [EmploymentDate], 
+    [ViewEmployees].[Vacation] AS [Vacation], 
+    [ViewEmployees].[Sick] AS [Sick], 
+    [ViewEmployees].[Department] AS [Department], 
+    [ViewEmployees].[Personal] AS [Personal]
+    FROM [dbo].[ViewEmployees] AS [ViewEmployees]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK LeaveTypeId_LeaveTypes" Association="Self.FK LeaveTypeId_LeaveTypes">
+            <End Role="LeaveStatus" EntitySet="LeaveStatus" />
+            <End Role="LeaveSubmissionTable" EntitySet="LeaveSubmissionTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Genderid__Gender" Association="Self.FK__Genderid__Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LeaveSubm__EmpID__29221CFB" Association="Self.FK__LeaveSubm__EmpID__29221CFB">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="LeaveSubmissionTable" EntitySet="LeaveSubmissionTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cancelid_Cancel" Association="Self.FK_Cancelid_Cancel">
+            <End Role="CancelationReasons" EntitySet="CancelationReasons" />
+            <End Role="LeaveSubmissionTable" EntitySet="LeaveSubmissionTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_RoleTypes" Association="Self.FK_Employee_RoleTypes">
+            <End Role="RoleTypes" EntitySet="RoleTypes" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveStatusid_LeaveStatus" Association="Self.FK_LeaveStatusid_LeaveStatus">
+            <End Role="LeaveStatus" EntitySet="LeaveStatus" />
+            <End Role="LeaveSubmissionTable" EntitySet="LeaveSubmissionTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LeaveManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LeaveManagementSystemEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="FilterbyAllFields">
+            <Parameter Name="EmpID" Mode="In" Type="String" />
+            <Parameter Name="type" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="String" />
+            <Parameter Name="EndDate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertLeaveRequest">
+            <Parameter Name="Empid" Mode="In" Type="Int32" />
+            <Parameter Name="SubmissionDate" Mode="In" Type="DateTime" />
+            <Parameter Name="LeaveTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="TotalDays" Mode="In" Type="Int32" />
+            <Parameter Name="Comments" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateLeaveStatus">
+            <Parameter Name="LeaveID" Mode="In" Type="Int32" />
+            <Parameter Name="NewStatus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateRoleType">
+            <Parameter Name="role" Mode="In" Type="String" />
+            <Parameter Name="roleid" Mode="In" Type="Int32" />
+            <Parameter Name="OperationType" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="CancelationReasons" EntityType="LeaveManagementSystemModel.CancelationReasons" />
+          <EntitySet Name="Employee" EntityType="LeaveManagementSystemModel.Employee" />
+          <EntitySet Name="Gender" EntityType="LeaveManagementSystemModel.Gender" />
+          <EntitySet Name="LeaveStatus" EntityType="LeaveManagementSystemModel.LeaveStatus" />
+          <EntitySet Name="LeaveSubmissionTable" EntityType="LeaveManagementSystemModel.LeaveSubmissionTable" />
+          <EntitySet Name="LeaveTypes" EntityType="LeaveManagementSystemModel.LeaveTypes" />
+          <EntitySet Name="Roletest" EntityType="LeaveManagementSystemModel.Roletest" />
+          <EntitySet Name="RoleTypes" EntityType="LeaveManagementSystemModel.RoleTypes" />
+          <EntitySet Name="Student" EntityType="LeaveManagementSystemModel.Student" />
+          <EntitySet Name="ViewAll" EntityType="LeaveManagementSystemModel.ViewAll" />
+          <EntitySet Name="ViewEmployees" EntityType="LeaveManagementSystemModel.ViewEmployees" />
+          <AssociationSet Name="FK_Cancelid_Cancel" Association="LeaveManagementSystemModel.FK_Cancelid_Cancel">
+            <End Role="CancelationReasons" EntitySet="CancelationReasons" />
+            <End Role="LeaveSubmissionTable" EntitySet="LeaveSubmissionTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Genderid__Gender" Association="LeaveManagementSystemModel.FK__Genderid__Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LeaveSubm__EmpID__29221CFB" Association="LeaveManagementSystemModel.FK__LeaveSubm__EmpID__29221CFB">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="LeaveSubmissionTable" EntitySet="LeaveSubmissionTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_RoleTypes" Association="LeaveManagementSystemModel.FK_Employee_RoleTypes">
+            <End Role="RoleTypes" EntitySet="RoleTypes" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveTypeId_LeaveTypes" Association="LeaveManagementSystemModel.FK_LeaveTypeId_LeaveTypes">
+            <End Role="LeaveStatus" EntitySet="LeaveStatus" />
+            <End Role="LeaveSubmissionTable" EntitySet="LeaveSubmissionTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveStatusid_LeaveStatus" Association="LeaveManagementSystemModel.FK_LeaveStatusid_LeaveStatus">
+            <End Role="LeaveStatus" EntitySet="LeaveStatus" />
+            <End Role="LeaveSubmissionTable" EntitySet="LeaveSubmissionTable" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="CancelationReasons">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LeaveSubmissionTable" Relationship="LeaveManagementSystemModel.FK_Cancelid_Cancel" FromRole="CancelationReasons" ToRole="LeaveSubmissionTable" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Genderid" Type="Int32" />
+          <Property Name="RoleTypeId" Type="Int32" />
+          <Property Name="EmploymentDate" Type="DateTime" Precision="0" />
+          <Property Name="Vacation" Type="Int32" />
+          <Property Name="Sick" Type="Int32" />
+          <Property Name="Department" Type="Int32" />
+          <Property Name="Personal" Type="Int32" />
+          <Property Name="Passwords" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Gender" Relationship="LeaveManagementSystemModel.FK__Genderid__Gender" FromRole="Employee" ToRole="Gender" />
+          <NavigationProperty Name="LeaveSubmissionTable" Relationship="LeaveManagementSystemModel.FK__LeaveSubm__EmpID__29221CFB" FromRole="Employee" ToRole="LeaveSubmissionTable" />
+          <NavigationProperty Name="RoleTypes" Relationship="LeaveManagementSystemModel.FK_Employee_RoleTypes" FromRole="Employee" ToRole="RoleTypes" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="gender1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="LeaveManagementSystemModel.FK__Genderid__Gender" FromRole="Gender" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="LeaveStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LeaveSubmissionTable" Relationship="LeaveManagementSystemModel.FK_LeaveTypeId_LeaveTypes" FromRole="LeaveStatus" ToRole="LeaveSubmissionTable" />
+          <NavigationProperty Name="LeaveSubmissionTable1" Relationship="LeaveManagementSystemModel.FK_LeaveStatusid_LeaveStatus" FromRole="LeaveStatus" ToRole="LeaveSubmissionTable" />
+        </EntityType>
+        <EntityType Name="LeaveSubmissionTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpID" Type="Int32" />
+          <Property Name="LeaveTypeId" Type="Int32" />
+          <Property Name="LeaveStatusId" Type="Int32" />
+          <Property Name="SubmissionDate" Type="DateTime" Precision="0" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="TotalDays" Type="Int32" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CancelId" Type="Int32" />
+          <NavigationProperty Name="CancelationReasons" Relationship="LeaveManagementSystemModel.FK_Cancelid_Cancel" FromRole="LeaveSubmissionTable" ToRole="CancelationReasons" />
+          <NavigationProperty Name="Employee" Relationship="LeaveManagementSystemModel.FK__LeaveSubm__EmpID__29221CFB" FromRole="LeaveSubmissionTable" ToRole="Employee" />
+          <NavigationProperty Name="LeaveStatus" Relationship="LeaveManagementSystemModel.FK_LeaveTypeId_LeaveTypes" FromRole="LeaveSubmissionTable" ToRole="LeaveStatus" />
+          <NavigationProperty Name="LeaveStatus1" Relationship="LeaveManagementSystemModel.FK_LeaveStatusid_LeaveStatus" FromRole="LeaveSubmissionTable" ToRole="LeaveStatus" />
+        </EntityType>
+        <EntityType Name="LeaveTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Roletest">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RoleTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="roles" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="LeaveManagementSystemModel.FK_Employee_RoleTypes" FromRole="RoleTypes" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="StudentName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="StudentFees" Type="Int32" />
+          <Property Name="StudentCity" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ViewAll">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Full_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SubmissionDate" Type="DateTime" Precision="0" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="TotalDays" Type="Int32" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ViewEmployees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="roles" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Passwords" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="EmploymentDate" Type="DateTime" Precision="0" />
+          <Property Name="Vacation" Type="Int32" />
+          <Property Name="Sick" Type="Int32" />
+          <Property Name="Department" Type="Int32" />
+          <Property Name="Personal" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Cancelid_Cancel">
+          <End Type="LeaveManagementSystemModel.CancelationReasons" Role="CancelationReasons" Multiplicity="0..1" />
+          <End Type="LeaveManagementSystemModel.LeaveSubmissionTable" Role="LeaveSubmissionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CancelationReasons">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LeaveSubmissionTable">
+              <PropertyRef Name="CancelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Genderid__Gender">
+          <End Type="LeaveManagementSystemModel.Gender" Role="Gender" Multiplicity="0..1" />
+          <End Type="LeaveManagementSystemModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Genderid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LeaveSubm__EmpID__29221CFB">
+          <End Type="LeaveManagementSystemModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="LeaveManagementSystemModel.LeaveSubmissionTable" Role="LeaveSubmissionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LeaveSubmissionTable">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_RoleTypes">
+          <End Type="LeaveManagementSystemModel.RoleTypes" Role="RoleTypes" Multiplicity="0..1" />
+          <End Type="LeaveManagementSystemModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleTypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveTypeId_LeaveTypes">
+          <End Type="LeaveManagementSystemModel.LeaveStatus" Role="LeaveStatus" Multiplicity="0..1" />
+          <End Type="LeaveManagementSystemModel.LeaveSubmissionTable" Role="LeaveSubmissionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeaveStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LeaveSubmissionTable">
+              <PropertyRef Name="LeaveTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveStatusid_LeaveStatus">
+          <End Type="LeaveManagementSystemModel.LeaveStatus" Role="LeaveStatus" Multiplicity="0..1" />
+          <End Type="LeaveManagementSystemModel.LeaveSubmissionTable" Role="LeaveSubmissionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LeaveStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LeaveSubmissionTable">
+              <PropertyRef Name="LeaveStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LeaveManagementSystemModelStoreContainer" CdmEntityContainer="LeaveManagementSystemEntities">
+          <FunctionImportMapping FunctionImportName="FilterbyAllFields" FunctionName="LeaveManagementSystemModel.Store.FilterbyAllFields" />
+          <FunctionImportMapping FunctionImportName="InsertLeaveRequest" FunctionName="LeaveManagementSystemModel.Store.InsertLeaveRequest" />
+          <FunctionImportMapping FunctionImportName="UpdateLeaveStatus" FunctionName="LeaveManagementSystemModel.Store.UpdateLeaveStatus" />
+          <FunctionImportMapping FunctionImportName="UpdateRoleType" FunctionName="LeaveManagementSystemModel.Store.UpdateRoleType" />
+          <EntitySetMapping Name="CancelationReasons">
+            <EntityTypeMapping TypeName="LeaveManagementSystemModel.CancelationReasons">
+              <MappingFragment StoreEntitySet="CancelationReasons">
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="LeaveManagementSystemModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Passwords" ColumnName="Passwords" />
+                <ScalarProperty Name="Personal" ColumnName="Personal" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Sick" ColumnName="Sick" />
+                <ScalarProperty Name="Vacation" ColumnName="Vacation" />
+                <ScalarProperty Name="EmploymentDate" ColumnName="EmploymentDate" />
+                <ScalarProperty Name="RoleTypeId" ColumnName="RoleTypeId" />
+                <ScalarProperty Name="Genderid" ColumnName="Genderid" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="LeaveManagementSystemModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="gender1" ColumnName="gender" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveStatus">
+            <EntityTypeMapping TypeName="LeaveManagementSystemModel.LeaveStatus">
+              <MappingFragment StoreEntitySet="LeaveStatus">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveSubmissionTable">
+            <EntityTypeMapping TypeName="LeaveManagementSystemModel.LeaveSubmissionTable">
+              <MappingFragment StoreEntitySet="LeaveSubmissionTable">
+                <ScalarProperty Name="CancelId" ColumnName="CancelId" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="TotalDays" ColumnName="TotalDays" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
+                <ScalarProperty Name="LeaveStatusId" ColumnName="LeaveStatusId" />
+                <ScalarProperty Name="LeaveTypeId" ColumnName="LeaveTypeId" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveTypes">
+            <EntityTypeMapping TypeName="LeaveManagementSystemModel.LeaveTypes">
+              <MappingFragment StoreEntitySet="LeaveTypes">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roletest">
+            <EntityTypeMapping TypeName="LeaveManagementSystemModel.Roletest">
+              <MappingFragment StoreEntitySet="Roletest">
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleTypes">
+            <EntityTypeMapping TypeName="LeaveManagementSystemModel.RoleTypes">
+              <MappingFragment StoreEntitySet="RoleTypes">
+                <ScalarProperty Name="roles" ColumnName="roles" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="LeaveManagementSystemModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="StudentCity" ColumnName="StudentCity" />
+                <ScalarProperty Name="StudentFees" ColumnName="StudentFees" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewAll">
+            <EntityTypeMapping TypeName="LeaveManagementSystemModel.ViewAll">
+              <MappingFragment StoreEntitySet="ViewAll">
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="TotalDays" ColumnName="TotalDays" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="Full_Name" ColumnName="Full Name" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewEmployees">
+            <EntityTypeMapping TypeName="LeaveManagementSystemModel.ViewEmployees">
+              <MappingFragment StoreEntitySet="ViewEmployees">
+                <ScalarProperty Name="Personal" ColumnName="Personal" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Sick" ColumnName="Sick" />
+                <ScalarProperty Name="Vacation" ColumnName="Vacation" />
+                <ScalarProperty Name="EmploymentDate" ColumnName="EmploymentDate" />
+                <ScalarProperty Name="Passwords" ColumnName="Passwords" />
+                <ScalarProperty Name="roles" ColumnName="roles" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
