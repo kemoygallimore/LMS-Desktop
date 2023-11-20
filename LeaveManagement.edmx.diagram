@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="42e4e496fe7b41829390322d0cfd8e08" Name="Diagram1">
-        <EntityTypeShape EntityType="LeaveManagementSystemModel.CancelationReasons" Width="1.5" PointX="0.75" PointY="5.25" />
-        <EntityTypeShape EntityType="LeaveManagementSystemModel.Employee" Width="1.5" PointX="0.75" PointY="7.625" />
-        <EntityTypeShape EntityType="LeaveManagementSystemModel.Gender" Width="1.5" PointX="1.5" PointY="14.875" />
+      <Diagram DiagramId="06321ce49808416a9bb1a012479a1a15" Name="Diagram1">
+        <EntityTypeShape EntityType="LeaveManagementSystemModel.CancelationReasons" Width="1.5" PointX="0.75" PointY="17.25" />
+        <EntityTypeShape EntityType="LeaveManagementSystemModel.Employee" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="LeaveManagementSystemModel.Gender" Width="1.5" PointX="1.5" PointY="12.5" />
         <EntityTypeShape EntityType="LeaveManagementSystemModel.LeaveStatus" Width="1.5" PointX="0.75" PointY="2" />
         <EntityTypeShape EntityType="LeaveManagementSystemModel.LeaveSubmissionTable" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="LeaveManagementSystemModel.LeaveTypes" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="LeaveManagementSystemModel.Roletest" Width="1.5" PointX="2.75" PointY="5.75" />
-        <EntityTypeShape EntityType="LeaveManagementSystemModel.RoleTypes" Width="1.5" PointX="1.5" PointY="12.5" />
+        <EntityTypeShape EntityType="LeaveManagementSystemModel.RoleTypes" Width="1.5" PointX="1.5" PointY="14.875" />
         <EntityTypeShape EntityType="LeaveManagementSystemModel.Student" Width="1.5" PointX="5.75" PointY="3.75" />
         <EntityTypeShape EntityType="LeaveManagementSystemModel.ViewAll" Width="1.5" PointX="4.75" PointY="6.75" />
         <EntityTypeShape EntityType="LeaveManagementSystemModel.ViewEmployees" Width="1.5" PointX="6.75" PointY="6.75" />

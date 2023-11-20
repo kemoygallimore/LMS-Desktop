@@ -15,10 +15,10 @@ namespace LMS_Desktop
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class LeaveManagementSystemEntities : DbContext
+    public partial class LeaveManagementSystemEntities4 : DbContext
     {
-        public LeaveManagementSystemEntities()
-            : base("name=LeaveManagementSystemEntities")
+        public LeaveManagementSystemEntities4()
+            : base("name=LeaveManagementSystemEntities4")
         {
         }
     
@@ -39,7 +39,7 @@ namespace LMS_Desktop
         public virtual DbSet<ViewAll> ViewAll { get; set; }
         public virtual DbSet<ViewEmployees> ViewEmployees { get; set; }
     
-        public virtual int FilterbyAllFields(string empID, string type, string status, string startDate, string endDate)
+        public virtual int FilterbyAllFields(string empID, string type, string status, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
         {
             var empIDParameter = empID != null ?
                 new ObjectParameter("EmpID", empID) :
@@ -53,13 +53,13 @@ namespace LMS_Desktop
                 new ObjectParameter("status", status) :
                 new ObjectParameter("status", typeof(string));
     
-            var startDateParameter = startDate != null ?
+            var startDateParameter = startDate.HasValue ?
                 new ObjectParameter("StartDate", startDate) :
-                new ObjectParameter("StartDate", typeof(string));
+                new ObjectParameter("StartDate", typeof(System.DateTime));
     
-            var endDateParameter = endDate != null ?
+            var endDateParameter = endDate.HasValue ?
                 new ObjectParameter("EndDate", endDate) :
-                new ObjectParameter("EndDate", typeof(string));
+                new ObjectParameter("EndDate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FilterbyAllFields", empIDParameter, typeParameter, statusParameter, startDateParameter, endDateParameter);
         }
@@ -125,6 +125,57 @@ namespace LMS_Desktop
                 new ObjectParameter("OperationType", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateRoleType", roleParameter, roleidParameter, operationTypeParameter);
+        }
+    
+        public virtual ObjectResult<AllRequests_SP_Result> AllRequests_SP()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AllRequests_SP_Result>("AllRequests_SP");
+        }
+    
+        public virtual ObjectResult<Filters_Result> Filters(string empID, string type, string status, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var empIDParameter = empID != null ?
+                new ObjectParameter("EmpID", empID) :
+                new ObjectParameter("EmpID", typeof(string));
+    
+            var typeParameter = type != null ?
+                new ObjectParameter("type", type) :
+                new ObjectParameter("type", typeof(string));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Filters_Result>("Filters", empIDParameter, typeParameter, statusParameter, startDateParameter, endDateParameter);
+        }
+    
+        public virtual ObjectResult<LeaveRequestFilters_Result> LeaveRequestFilters(string type, string staff, string status, Nullable<System.DateTime> submissionDate)
+        {
+            var typeParameter = type != null ?
+                new ObjectParameter("type", type) :
+                new ObjectParameter("type", typeof(string));
+    
+            var staffParameter = staff != null ?
+                new ObjectParameter("staff", staff) :
+                new ObjectParameter("staff", typeof(string));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(string));
+    
+            var submissionDateParameter = submissionDate.HasValue ?
+                new ObjectParameter("SubmissionDate", submissionDate) :
+                new ObjectParameter("SubmissionDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LeaveRequestFilters_Result>("LeaveRequestFilters", typeParameter, staffParameter, statusParameter, submissionDateParameter);
         }
     }
 }

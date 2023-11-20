@@ -97,7 +97,7 @@ warning 6002: The table/view 'LeaveManagementSystem.dbo.ViewAll' does not have a
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="EmployeeID" Type="nvarchar" MaxLength="50" />
           <Property Name="gender" Type="nvarchar" MaxLength="15" />
-          <Property Name="Full Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Full Name" Type="nvarchar" MaxLength="101" />
           <Property Name="type" Type="varchar" MaxLength="50" />
           <Property Name="SubmissionDate" Type="date" />
           <Property Name="StartDate" Type="date" />
@@ -198,12 +198,20 @@ warning 6002: The table/view 'LeaveManagementSystem.dbo.ViewEmployees' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AllRequests_SP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="FilterbyAllFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmpID" Type="nvarchar" Mode="In" />
           <Parameter Name="type" Type="nvarchar" Mode="In" />
           <Parameter Name="status" Type="nvarchar" Mode="In" />
-          <Parameter Name="StartDate" Type="nvarchar" Mode="In" />
-          <Parameter Name="EndDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="Filters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpID" Type="nvarchar" Mode="In" />
+          <Parameter Name="type" Type="nvarchar" Mode="In" />
+          <Parameter Name="status" Type="nvarchar" Mode="In" />
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
         </Function>
         <Function Name="InsertLeaveRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Empid" Type="int" Mode="In" />
@@ -213,6 +221,12 @@ warning 6002: The table/view 'LeaveManagementSystem.dbo.ViewEmployees' does not 
           <Parameter Name="EndDate" Type="date" Mode="In" />
           <Parameter Name="TotalDays" Type="int" Mode="In" />
           <Parameter Name="Comments" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="LeaveRequestFilters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="type" Type="nvarchar" Mode="In" />
+          <Parameter Name="staff" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="status" Type="nvarchar" Mode="In" />
+          <Parameter Name="SubmissionDate" Type="date" Mode="In" />
         </Function>
         <Function Name="UpdateLeaveStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LeaveID" Type="int" Mode="In" />
@@ -294,13 +308,13 @@ warning 6002: The table/view 'LeaveManagementSystem.dbo.ViewEmployees' does not 
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LeaveManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="LeaveManagementSystemEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="LeaveManagementSystemEntities4" annotation:LazyLoadingEnabled="true">
           <FunctionImport Name="FilterbyAllFields">
             <Parameter Name="EmpID" Mode="In" Type="String" />
             <Parameter Name="type" Mode="In" Type="String" />
             <Parameter Name="status" Mode="In" Type="String" />
-            <Parameter Name="StartDate" Mode="In" Type="String" />
-            <Parameter Name="EndDate" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="InsertLeaveRequest">
             <Parameter Name="Empid" Mode="In" Type="Int32" />
@@ -355,6 +369,20 @@ warning 6002: The table/view 'LeaveManagementSystem.dbo.ViewEmployees' does not 
             <End Role="LeaveStatus" EntitySet="LeaveStatus" />
             <End Role="LeaveSubmissionTable" EntitySet="LeaveSubmissionTable" />
           </AssociationSet>
+          <FunctionImport Name="AllRequests_SP" ReturnType="Collection(LeaveManagementSystemModel.AllRequests_SP_Result)" />
+          <FunctionImport Name="Filters" ReturnType="Collection(LeaveManagementSystemModel.Filters_Result)">
+            <Parameter Name="EmpID" Mode="In" Type="String" />
+            <Parameter Name="type" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="LeaveRequestFilters" ReturnType="Collection(LeaveManagementSystemModel.LeaveRequestFilters_Result)">
+            <Parameter Name="type" Mode="In" Type="String" />
+            <Parameter Name="staff" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="String" />
+            <Parameter Name="SubmissionDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="CancelationReasons">
           <Key>
@@ -458,7 +486,7 @@ warning 6002: The table/view 'LeaveManagementSystem.dbo.ViewEmployees' does not 
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="EmployeeID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="gender" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Full_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Full_Name" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
           <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SubmissionDate" Type="DateTime" Precision="0" />
           <Property Name="StartDate" Type="DateTime" Precision="0" />
@@ -557,12 +585,54 @@ warning 6002: The table/view 'LeaveManagementSystem.dbo.ViewEmployees' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="AllRequests_SP_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="EmployeeID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="101" />
+          <Property Type="String" Name="type" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="SubmissionDate" Nullable="true" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" />
+          <Property Type="Int32" Name="TotalDays" Nullable="true" />
+          <Property Type="String" Name="Comments" Nullable="true" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="reason" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Filters_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="EmployeeID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Full_Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="type" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="SubmissionDate" Nullable="true" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" />
+          <Property Type="Int32" Name="TotalDays" Nullable="true" />
+          <Property Type="String" Name="Comments" Nullable="true" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="reason" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="LeaveRequestFilters_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="EmployeeID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="101" />
+          <Property Type="String" Name="type" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="SubmissionDate" Nullable="true" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" />
+          <Property Type="Int32" Name="TotalDays" Nullable="true" />
+          <Property Type="String" Name="Comments" Nullable="true" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="reason" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="LeaveManagementSystemModelStoreContainer" CdmEntityContainer="LeaveManagementSystemEntities">
+        <EntityContainerMapping StorageEntityContainer="LeaveManagementSystemModelStoreContainer" CdmEntityContainer="LeaveManagementSystemEntities4">
           <FunctionImportMapping FunctionImportName="FilterbyAllFields" FunctionName="LeaveManagementSystemModel.Store.FilterbyAllFields" />
           <FunctionImportMapping FunctionImportName="InsertLeaveRequest" FunctionName="LeaveManagementSystemModel.Store.InsertLeaveRequest" />
           <FunctionImportMapping FunctionImportName="UpdateLeaveStatus" FunctionName="LeaveManagementSystemModel.Store.UpdateLeaveStatus" />
@@ -695,6 +765,60 @@ warning 6002: The table/view 'LeaveManagementSystem.dbo.ViewEmployees' does not 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AllRequests_SP" FunctionName="LeaveManagementSystemModel.Store.AllRequests_SP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LeaveManagementSystemModel.AllRequests_SP_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="TotalDays" ColumnName="TotalDays" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Filters" FunctionName="LeaveManagementSystemModel.Store.Filters">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LeaveManagementSystemModel.Filters_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="Full_Name" ColumnName="Full Name" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="TotalDays" ColumnName="TotalDays" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LeaveRequestFilters" FunctionName="LeaveManagementSystemModel.Store.LeaveRequestFilters">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LeaveManagementSystemModel.LeaveRequestFilters_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="SubmissionDate" ColumnName="SubmissionDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="TotalDays" ColumnName="TotalDays" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -11,6 +11,7 @@ namespace LMS_Desktop
     internal class LoadFromDatabase
     {
         public string connection = " data source=kemoyslenovo\\SQLEXPRESS;initial catalog=LeaveManagementSystem;integrated Security=true";
+        LeaveManagementSystemEntities4 LMS = new LeaveManagementSystemEntities4();
 
         public LoadFromDatabase() { }
 
@@ -55,8 +56,22 @@ namespace LMS_Desktop
                 }
             }
         }
+        public void LoadType(ComboBox type)
+        {
+            var load = LMS.LeaveTypes.ToList();
+            type.DisplayMember = "Type";
+            type.ValueMember = "id";
+            type.DataSource = load;
+        }
+        public void LoadStatus(ComboBox status)
+        {
+            var load = LMS.LeaveStatus.ToList();
+            status.DisplayMember = "status";
+            status.ValueMember = "id";
+            status.DataSource = load;
+        }
 
-        
-        
+
+
     }
 }

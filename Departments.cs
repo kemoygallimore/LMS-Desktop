@@ -12,11 +12,11 @@ namespace LMS_Desktop
 {
     public partial class Departments : Form
     {
-        private readonly LeaveManagementSystemEntities LMS;
+        private readonly LeaveManagementSystemEntities4 LMS;
         public Departments()
         {
             InitializeComponent();
-            LMS = new LeaveManagementSystemEntities();
+            LMS = new LeaveManagementSystemEntities4();
         }
 
         private void Departments_Load(object sender, EventArgs e)

@@ -14,12 +14,12 @@ namespace LMS_Desktop
     public partial class RoleAccess : Form
     {
         int selectid=100;
-        private readonly LeaveManagementSystemEntities LMS;
+        private readonly LeaveManagementSystemEntities4 LMS;
         SqlCommand cmd;
         public RoleAccess()
         {
             InitializeComponent();
-            LMS = new LeaveManagementSystemEntities();
+            LMS = new LeaveManagementSystemEntities4();
         }
         public void populate()
         {
